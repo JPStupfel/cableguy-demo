@@ -42,4 +42,4 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 # set :ssh_options, verify_host_key: :secure
 
 
-set :rvm_map_bins, %w{gem rake ruby rails bundle}
+# set :rvm_map_bins, %w{gem rake ruby rails bundle}
