@@ -1,5 +1,5 @@
 # set up user
-ssh root@yourserverip
+ssh root@147.182.173.190
 adduser deploy
 adduser deploy sudo
 vi /etc/ssh/sshd_config
@@ -7,10 +7,10 @@ enable PasswordAuthentication
 save
 systemctl restart sshd
 exit
-ssh-copy-id deploy@yourserverip
+ssh-copy-id deploy@147.182.173.190
 
 # log in
-ssh deploy@yourserverip
+ssh deploy@147.182.173.190
 
 # basic packages
 # Adding Node.js repository
@@ -61,31 +61,31 @@ sudo ufw allow 'Nginx Full'
 sudo ufw allow OpenSSH
 
 
-sudo vim /etc/nginx/sites-enabled/yourapp
+sudo vim /etc/nginx/sites-enabled/cableguy
 # basic for port 80
 server {
   listen 80 ;
   listen [::]:80;
-  server_name www.yourdomain yourdomain;
-  return 301 https://yourdomain$request_uri;
+  server_name www.applecypher.xyz;
+  return 301 https://applecypher.xyz$request_uri;
 }
 
 # install certbot
 sudo apt install certbot python3-certbot-nginx
 sudo certbot certonly --nginx
 
-sudo vim /etc/nginx/sites-enabled/yourapp-ssl
-# /etc/nginx/sites-enabled/yourapp-ssl
+sudo vim /etc/nginx/sites-enabled/cableguy-ssl
+# /etc/nginx/sites-enabled/cableguy-ssl
 
 server {
   listen 443 ssl;
 
-  server_name yourdomain;
+  server_name applecypher.xyz;
   
-#	ssl_certificate /etc/letsencrypt/live/yourdomain/fullchain.pem;
-#	ssl_certificate_key  /etc/letsencrypt/live/yourdomain/privkey.pem;
+#	ssl_certificate /etc/letsencrypt/live/applecypher.xyz/fullchain.pem;
+#	ssl_certificate_key  /etc/letsencrypt/live/applecypher.xyz/privkey.pem;
 
-  root /home/deploy/yourapp/current/public;
+  root /home/deploy/cableguy/current/public;
 
   passenger_enabled on;
   passenger_app_env production;
@@ -117,6 +117,7 @@ server {
 
 }
 
+mkdir cableguy
 
 sudo service nginx reload
 
@@ -125,15 +126,15 @@ sudo service nginx reload
 sudo apt-get install postgresql postgresql-contrib libpq-dev
 sudo su - postgres
 createuser --pwprompt deploy
-createdb -O deploy yourapp
+createdb -O deploy cableguy
 exit
 
-vi /home/deploy/yourapp/.rbenv-vars
+vi /home/deploy/cableguy/.rbenv-vars
 
 # .rbenv-vars
 # For Postgres
-DATABASE_URL=postgresql://deploy:APASSWORD@127.0.0.1/yourapp
-SECRET_KEY_BASE=ASECRET
+DATABASE_URL=postgresql://deploy:Diamonda505cableguypostgres@127.0.0.1/cableguy
+SECRET_KEY_BASE=78459843
 
 # alter gem file to add pg
 gem 'pg', '>= 0.18', '< 2.0'
@@ -159,7 +160,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.7.2' # or whatever version you chose
 
 # config/deploy.rb
-set :application, "yourapp"
+set :application, "cableguy"
 set :repo_url, "git@github.com:philsmy/cable-guy-example.git"
 set :branch, 'main'
 
@@ -172,12 +173,12 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 set :keep_releases, 5
 
 # config/deploy/production
-server 'yourserverip', user: 'deploy', roles: %w{app db web}
+server '147.182.173.190', user: 'deploy', roles: %w{app db web}
 
 
 cap production deploy
 
 # add console file
 export RAILS_ENV=production
-cd /home/deploy/yourapp/current
+cd /home/deploy/cableguy/current
 bundle exec rails c

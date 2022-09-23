@@ -2,7 +2,7 @@
 lock "~> 3.15.0"
 
 set :application, "cableguy"
-set :repo_url, "git@github.com:philsmy/cable-guy-example.git"
+set :repo_url, "git@github.com:JPStupfel/cableguy-demo.git"
 set :branch, 'main'
 
 # Default branch is :master

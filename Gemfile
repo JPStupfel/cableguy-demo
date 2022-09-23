@@ -5,7 +5,7 @@ ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.0'
-# Use mysql as the database for Active Record
+# Use postgres as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 
 # Use Puma as the app server
@@ -30,8 +30,9 @@ gem 'redis', '~> 4.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
-  gem 'mysql2', '~> 0.5'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+# Use mysql as the database for Active Record
+#  gem 'mysql2', '~> 0.5.0'  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
