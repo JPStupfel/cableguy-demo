@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-# lock "~> 3.15.0"
+ lock "~> 3.17.1"
 
 set :application, "cableguy"
 set :repo_url, "git@github.com:JPStupfel/cableguy-demo.git"
@@ -40,3 +40,6 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+
+set :rvm_map_bins, %w{gem rake ruby rails bundle}
